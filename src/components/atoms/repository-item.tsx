@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { clsx } from 'clsx';
 
-type RepositoryItemProps = {
-  name: string;
-  lastUpdated: string;
-  loading: boolean;
+type RepositoryItemProps = Repository & {
+  loading?: boolean;
 };
 
 export const RepositoryItem: FC<RepositoryItemProps> = ({
