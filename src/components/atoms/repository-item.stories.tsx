@@ -7,6 +7,13 @@ type CompType = typeof RepositoryItem;
 const meta: Meta<CompType> = {
   title: '01-atoms/common/repository-item',
   component: RepositoryItem,
+  decorators: [
+    (Story) => (
+      <div role='list'>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
