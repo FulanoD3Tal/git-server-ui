@@ -17,7 +17,7 @@ export const RepositoryItem: FC<RepositoryItemProps> = ({
       <h3
         className={`${clsx(
           'text-xl font-semibold truncate mb-2 transition-opacity',
-          loading && 'opacity-50'
+          loading && 'opacity-60'
         )}`}
       >
         {name}
