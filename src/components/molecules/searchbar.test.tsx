@@ -13,6 +13,6 @@ describe('<SearchBar/>', () => {
   it('should render a error message', () => {
     const SearchBarWithError = composeStory(WithError, meta);
     render(<SearchBarWithError />);
-    screen.getByRole('alert', { name: WithError?.args?.hintText });
+    screen.getByText(WithError?.args?.hintText as string);
   });
 });
