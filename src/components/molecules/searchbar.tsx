@@ -13,7 +13,7 @@ export const SearchBar: FC<SearchBarProps> = ({
   hintText,
 }) => (
   <form className='border p-2 rounded-md flex gap-2 justify-between items-center'>
-    <TextBox {...textBoxProps} />
+    <TextBox {...textBoxProps} className='flex-1' />
     <span
       className={`${error ? 'text-red-500' : 'opacity-50'} text-sm`}
       role='alert'
