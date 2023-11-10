@@ -4,9 +4,9 @@ import { composeStory } from '@storybook/react';
 import meta, { Primary } from './textbox.stories';
 
 describe('<TextBox/>', () => {
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const TextBoxPrimary = composeStory(Primary, meta);
     render(<TextBoxPrimary />);
-    screen.getByRole('textbox', { name: Primary.args?.label });
+    await screen.getByRole('textbox', { name: Primary.args?.label });
   });
 });

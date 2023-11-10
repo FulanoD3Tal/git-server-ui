@@ -8,4 +8,4 @@ type Config = {
   defaultBranch: string;
 };
 
-type PartialConfig = Partial<PartialConfig>;
+type PartialConfig = Partial<Config>;
