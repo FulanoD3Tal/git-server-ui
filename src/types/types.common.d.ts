@@ -5,5 +5,7 @@ type Repository = {
 
 type Config = {
   rootPath: string;
-  defaultBranch?: string;
+  defaultBranch: string;
 };
+
+type PartialConfig = Partial<PartialConfig>;

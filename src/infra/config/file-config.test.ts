@@ -24,7 +24,7 @@ describe('Config file', () => {
   });
 
   it('should write into the file config', () => {
-    const configFile: Config = { rootPath: './dirTest' };
+    const configFile: PartialConfig = { rootPath: './dirTest' };
     saveConfigFile(configFile);
     expect(getConfigFile()).toEqual(configFile);
   });
