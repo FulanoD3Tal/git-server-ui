@@ -1,11 +1,9 @@
-import { describe, it, expect, vi, afterAll } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { ConfigurationSaver } from './configuration-saver';
-import { unlinkSync, existsSync } from 'fs';
 import { IConfiguration } from '../domain/configuration-interface';
+import { DEFAULT_CONFIG } from '../domain/constants';
 
 const testConfigFilePath = './config/config-test.json';
-
-const DEFAULT_CONFIG: PartialConfig = { defaultBranch: 'main' };
 
 class MockConfiguration implements IConfiguration {
   getConfigFile(): Partial<Config> | null {

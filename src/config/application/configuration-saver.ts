@@ -1,4 +1,5 @@
 import { IConfiguration } from '../domain/configuration-interface';
+import { DEFAULT_CONFIG } from '../domain/constants';
 
 export class ConfigurationSaver {
   constructor(private readonly configuration: IConfiguration) {}
@@ -10,7 +11,7 @@ export class ConfigurationSaver {
    */
   getConfig() {
     const config = this.configuration.getConfigFile();
-    if (!config) return null;
+    if (!config) return DEFAULT_CONFIG;
     return config;
   }
   /**
