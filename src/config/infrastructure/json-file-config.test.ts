@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
-import { getConfigFile, saveConfigFile } from './file-config';
 import { unlinkSync, writeFileSync } from 'fs';
+import { JsonFileConfig } from './json-file-config';
 
 const testConfigFilePath = './config/config-test.json';
 
@@ -20,12 +20,15 @@ describe('Config file', () => {
   afterAll(cleanConfigFile);
   it('should read the file config', () => {
     const configFileEmpty = {};
-    expect(getConfigFile()).toEqual(configFileEmpty);
+    const jsonFileConfig = new JsonFileConfig();
+    expect(jsonFileConfig.getConfigFile()).toEqual(configFileEmpty);
   });
 
   it('should write into the file config', () => {
     const configFile: PartialConfig = { rootPath: './dirTest' };
-    saveConfigFile(configFile);
-    expect(getConfigFile()).toEqual(configFile);
+    const jsonFileConfig = new JsonFileConfig();
+
+    jsonFileConfig.saveConfigFile(configFile);
+    expect(jsonFileConfig.getConfigFile()).toEqual(configFile);
   });
 });
