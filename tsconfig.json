@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["cypress", "@testing-library/cypress"]
   },
   // TODO: quick fix for cypress and nextjs 13, remove later
   "ts-node": {
