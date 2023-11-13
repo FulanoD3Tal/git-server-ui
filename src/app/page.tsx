@@ -1,6 +1,6 @@
 import { RepositoryList } from '@/components/molecules/repository-list';
 import { SearchBar } from '@/components/molecules/searchbar';
-import { getAllRepos } from '@/repository/git-repository';
+import { getAllRepos } from '@/core/repository/git-repository';
 
 export default async function Dashboard() {
   // TODO: validate if use server components of just tanskquery
