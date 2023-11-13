@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { ConfigurationSaver } from './configuration-saver';
 import { IConfiguration } from '../domain/configuration-interface';
 import { DEFAULT_CONFIG } from '../domain/constants';
+import { IConfigValidator } from '../domain/configuration-validator-interface';
 
 const testConfigFilePath = './config/config-test.json';
 
@@ -14,10 +15,20 @@ class MockConfiguration implements IConfiguration {
   }
 }
 
+class MockConfigValidator implements IConfigValidator {
+  validate(config: Partial<Config>): Partial<Config> {
+    return config;
+  }
+}
+
 describe('ConfigurationModule', () => {
   vi.stubEnv('CONFIG_FILE_PATH', testConfigFilePath);
   const mockConfiguration = new MockConfiguration();
-  const configurationSaver = new ConfigurationSaver(mockConfiguration);
+  const mockConfigValidator = new MockConfigValidator();
+  const configurationSaver = new ConfigurationSaver(
+    mockConfiguration,
+    mockConfigValidator
+  );
   it('should have a default configuration', () => {
     expect(configurationSaver.getConfig()).toBe(DEFAULT_CONFIG);
   });
