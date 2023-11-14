@@ -1,19 +1,19 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getConfig, postConfig } from './rest-repository';
 
-type useRestConfigProps = {
-  initialData?: PartialConfig;
-};
-
-export const useRestConfig = ({ initialData }: useRestConfigProps) => {
+export const useRestConfig = () => {
   const query = useQuery({
     queryKey: ['config'],
     queryFn: getConfig,
-    initialData,
   });
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
-    mutationFn:postConfig
+    mutationFn: postConfig,
+    onSettled() {
+      queryClient.invalidateQueries({ queryKey: ['config'] });
+    },
   });
 
   return { query, mutation };

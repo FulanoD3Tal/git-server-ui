@@ -1,4 +1,3 @@
-import { ConfigForm } from '@/components/organisms/config-form/config-form';
 import { ConfigPage } from '@/components/pages/config-page/config-page';
 import { configurationController } from '@/config/infrastructure/configuration-controller';
 

@@ -6,6 +6,7 @@ describe('Configuration flow', () => {
     cy.findByLabelText(/root path/i).type('./');
     cy.findByRole('button').click();
     cy.reload();
-    cy.findByLabelText(/root path/i).should('have.value', './');
+    cy.findByDisplayValue('./');
+    cy.findByDisplayValue('main');
   });
 });
