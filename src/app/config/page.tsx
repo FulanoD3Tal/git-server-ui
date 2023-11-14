@@ -1,6 +1,8 @@
 import { ConfigPage } from '@/components/pages/config-page/config-page';
 import { configurationController } from '@/config/infrastructure/configuration-controller';
 
+export const dynamic = 'force-dynamic';
+
 export default function ConfigSettingsPage() {
   const config = configurationController.getConfig();
   return (
