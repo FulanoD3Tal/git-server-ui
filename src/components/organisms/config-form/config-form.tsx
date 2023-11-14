@@ -1,12 +1,13 @@
+'use client';
 import { ConfigField } from '@/components/molecules/config-field/config-field';
-import { useConfig } from '@/config/infrastructure/hooks/use-config';
+import { useConfigForm } from '@/config/infrastructure/hooks/use-config-form';
 import { FC } from 'react';
 
 type ConfigFormProps = {
   /** callback function when save the form */
   onSave: (config: PartialConfig) => void;
   /** previous data to should when load */
-  previousData: Config;
+  previousData?: PartialConfig;
 };
 
 /**
@@ -20,7 +21,7 @@ export const ConfigForm: FC<ConfigFormProps> = ({ onSave, previousData }) => {
       register,
       formState: { errors },
     },
-  } = useConfig({
+  } = useConfigForm({
     previousData,
   });
 

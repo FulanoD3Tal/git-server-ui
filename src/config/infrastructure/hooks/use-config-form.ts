@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { configSchema } from '../configuration-validator';
 
 type useConfigProps = {
-  previousData?: Config;
+  previousData?: PartialConfig;
 };
 
-export const useConfig = ({ previousData }: useConfigProps) => {
-  const form = useForm<Config>({
+export const useConfigForm = ({ previousData }: useConfigProps) => {
+  const form = useForm<PartialConfig>({
     reValidateMode: 'onChange',
     defaultValues: previousData,
     resolver: zodResolver(configSchema),
