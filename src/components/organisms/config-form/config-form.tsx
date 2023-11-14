@@ -1,12 +1,13 @@
+'use client';
 import { ConfigField } from '@/components/molecules/config-field/config-field';
+import { useConfigForm } from '@/config/infrastructure/hooks/use-config-form';
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
 
 type ConfigFormProps = {
   /** callback function when save the form */
   onSave: (config: PartialConfig) => void;
   /** previous data to should when load */
-  previousData: Config;
+  previousData?: PartialConfig;
 };
 
 /**
@@ -14,9 +15,14 @@ type ConfigFormProps = {
  * @author [Ing. Roberto Alonso De la Garza Mendoza](https://github.com/FulanoD3Tal)
  */
 export const ConfigForm: FC<ConfigFormProps> = ({ onSave, previousData }) => {
-  const { handleSubmit, register } = useForm<Config>({
-    reValidateMode: 'onChange',
-    defaultValues: previousData,
+  const {
+    form: {
+      handleSubmit,
+      register,
+      formState: { errors },
+    },
+  } = useConfigForm({
+    previousData,
   });
 
   const onSubmit = (data: PartialConfig) => {
@@ -32,6 +38,8 @@ export const ConfigForm: FC<ConfigFormProps> = ({ onSave, previousData }) => {
           label: 'use a relative path',
           'aria-label': 'Root path',
         }}
+        error={Boolean(errors.rootPath)}
+        hitText={errors.rootPath?.message}
       />
       <ConfigField
         label='Default branch'
@@ -40,6 +48,8 @@ export const ConfigForm: FC<ConfigFormProps> = ({ onSave, previousData }) => {
           label: 'branch to use when create new repos',
           'aria-label': 'Default branch',
         }}
+        error={Boolean(errors.defaultBranch)}
+        hitText={errors.defaultBranch?.message}
       />
       {/* TODO: move it to the atoms folders */}
       <button

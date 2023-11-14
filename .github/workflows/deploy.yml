@@ -30,6 +30,8 @@ jobs:
   e2e:
     name: E2E Cypress Testing
     runs-on: ubuntu-22.04
+    env:
+      CONFIG_FILE_PATH: './config/config-test.json'
     steps:
       - uses: actions/checkout@v4
       - name: Cypress run
@@ -38,3 +40,14 @@ jobs:
           build: npm run build
           start: npm start
           wait-on: 'http://localhost:3000'
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`

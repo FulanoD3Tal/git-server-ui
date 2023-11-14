@@ -48,7 +48,16 @@ describe('<ConfigForm/>', () => {
     expect(field1.value).toBe(previousConfig.rootPath);
     expect(field2.value).toBe(previousConfig.defaultBranch);
   });
-  //TODO:
-  it.skip('should show error message when empty fields', () => {});
+  it('should show error message when empty fields', async () => {
+    const user = userEvent.setup();
+
+    const ConfigFormPrimary = composeStory(Primary, meta);
+    render(<ConfigFormPrimary />);
+
+    const button = await screen.getByRole('button');
+    await user.click(button);
+
+    expect((await screen.findAllByRole('alert')).length).toBe(2);
+  });
   it.skip('should have loading state', () => {});
 });

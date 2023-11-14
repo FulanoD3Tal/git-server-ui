@@ -1,8 +1,12 @@
 import { IConfiguration } from '../domain/configuration-interface';
+import { IConfigValidator } from '../domain/configuration-validator-interface';
 import { DEFAULT_CONFIG } from '../domain/constants';
 
 export class ConfigurationSaver {
-  constructor(private readonly configuration: IConfiguration) {}
+  constructor(
+    private readonly configuration: IConfiguration,
+    private readonly configurationValidator: IConfigValidator
+  ) {}
 
   /**
    * Get actual configuration
@@ -23,7 +27,8 @@ export class ConfigurationSaver {
   setConfig(newConfig: PartialConfig) {
     const prevConfig = this.getConfig();
     const actualConfig = { ...prevConfig, ...newConfig };
-    const saved = this.configuration.saveConfigFile(actualConfig);
+    const parsedConfig = this.configurationValidator.validate(actualConfig);
+    const saved = this.configuration.saveConfigFile(parsedConfig);
     if (!saved) return null;
     return actualConfig;
   }
