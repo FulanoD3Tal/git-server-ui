@@ -30,6 +30,8 @@ jobs:
   e2e:
     name: E2E Cypress Testing
     runs-on: ubuntu-22.04
+    env:
+      CONFIG_FILE_PATH: './config/config-test.json'
     steps:
       - uses: actions/checkout@v4
       - name: Cypress run
