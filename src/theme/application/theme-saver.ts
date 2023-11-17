@@ -8,7 +8,7 @@ export class ThemeSaver {
    * @param theme
    * @returns
    */
-  async saveTheme(theme: Theme) {
+  saveTheme(theme: Theme) {
     return this.themeSwitcher.switch(theme);
   }
 
@@ -16,7 +16,7 @@ export class ThemeSaver {
    * Load the current theme or get default one ('light')
    * @returns the current theme
    */
-  async loadTheme() {
+  loadTheme() {
     return this.themeSwitcher.load();
   }
 }

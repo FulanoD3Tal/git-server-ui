@@ -22,7 +22,7 @@ export const ThemeIconButton: FC<ThemeIconButtonProps> = ({
 
   return (
     <BaseButton
-      className='px-2'
+      className='!p-2'
       btnType='secondary'
       aria-label={label}
       title={label}
