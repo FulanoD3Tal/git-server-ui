@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import QueryProvider from '@/shared/infrastructure/query-provider';
+import { Header } from '@/components/organisms/header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <Header/>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
