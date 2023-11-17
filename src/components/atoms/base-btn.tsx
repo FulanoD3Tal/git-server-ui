@@ -23,7 +23,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
         btnType === 'primary' &&
           'bg-slate-700 text-white disabled:bg-slate-700/60 dark:border-none dark:disabled:text-white/60',
         btnType === 'secondary' &&
-          'border-slate-700 text-slate-700 hover:text-white hover:bg-slate-700 disabled:border-slate-700/60 disabled:text-slate-700/60 dark:text-white dark:border dark:disabled:text-white/60'
+          'border-slate-700 text-slate-700 hover:text-white hover:bg-slate-700 disabled:border-slate-700/60 disabled:text-slate-700/60 dark:text-white border dark:disabled:text-white/60'
       )} ${className}`}
       {...(props as MotionProps)}
     >
