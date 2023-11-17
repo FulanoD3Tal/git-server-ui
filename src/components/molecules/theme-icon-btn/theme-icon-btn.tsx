@@ -2,8 +2,6 @@ import { BaseButton } from '@/components/atoms/base-btn';
 import { motion } from 'framer-motion';
 import React, { FC } from 'react';
 
-type Theme = 'dark' | 'light';
-
 type ThemeIconButtonProps = {
   theme: Theme;
   onSwitch: () => void;
