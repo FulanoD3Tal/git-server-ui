@@ -3,6 +3,8 @@ import { SearchBar } from '@/components/molecules/searchbar';
 import { configurationController } from '@/config/infrastructure/configuration-controller';
 import { redirect } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Dashboard() {
   const config = configurationController.getConfig();
   if (!config.rootPath) redirect('/config');
