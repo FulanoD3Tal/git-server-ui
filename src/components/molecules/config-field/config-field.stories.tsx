@@ -25,3 +25,10 @@ export const WithError: Story = {
     hitText: 'This is an error',
   },
 };
+export const Disabled: Story = {
+  args: {
+    ...Primary.args,
+    textBoxProps: { value: 'testing', label: 'testing' },
+    disabled: true,
+  },
+};

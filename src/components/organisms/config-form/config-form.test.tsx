@@ -2,7 +2,7 @@ import { describe, it, afterEach, vi, expect } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { composeStory } from '@storybook/react';
-import meta, { Primary } from './config-form.stories';
+import meta, { Primary, Loading } from './config-form.stories';
 
 describe('<ConfigForm/>', () => {
   const fields = ['Root path', 'Default branch'];
@@ -59,5 +59,10 @@ describe('<ConfigForm/>', () => {
 
     expect((await screen.findAllByRole('alert')).length).toBe(2);
   });
-  it.skip('should have loading state', () => {});
+  it('should have loading state', async () => {
+    const ConfigFormLoading = composeStory(Loading, meta);
+    render(<ConfigFormLoading />);
+
+    expect(screen.getByRole('button', { name: /saving/i }));
+  });
 });

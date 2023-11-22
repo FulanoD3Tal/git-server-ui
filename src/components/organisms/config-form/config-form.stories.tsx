@@ -15,3 +15,14 @@ type Story = StoryObj<CompType>;
 export const Primary: Story = {
   args: {},
 };
+export const WithData: Story = {
+  args: {
+    previousData: { rootPath: 'testing', defaultBranch: 'testing' },
+  },
+};
+export const Loading: Story = {
+  args: {
+    ...WithData.args,
+    loading: true,
+  },
+};

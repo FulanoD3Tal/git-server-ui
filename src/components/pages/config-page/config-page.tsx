@@ -8,9 +8,16 @@ type ConfigPageProps = {
 };
 
 export const ConfigPage: FC<ConfigPageProps> = ({ initialData }) => {
+  // TODO: add success/error feedback
   const {
-    mutation: { mutate },
+    mutation: { mutate, isPending },
   } = useRestConfig();
 
-  return <ConfigForm onSave={mutate} previousData={initialData} />;
+  return (
+    <ConfigForm
+      onSave={mutate}
+      previousData={initialData}
+      loading={isPending}
+    />
+  );
 };
