@@ -20,8 +20,8 @@ class MockFolderRepository implements IFolderFinder {
 
 const MockRepo = {
   name: 'repo-1',
-  lastUpdated: 123,
-  createdAt: 123,
+  lastUpdated: "123",
+  createdAt: "123",
   uuid: '',
   path: '',
 };
