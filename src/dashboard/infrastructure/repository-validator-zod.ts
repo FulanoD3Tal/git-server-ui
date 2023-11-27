@@ -9,4 +9,5 @@ export class RepositoryValidatorZod implements IRepositoryValidator {
 
 export const configSchema = z.object({
   name: z.string().min(3).trim(),
+  path: z.string().trim(),
 });

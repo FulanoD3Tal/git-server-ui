@@ -3,6 +3,7 @@ import { RepositoryService } from './repository-service';
 import { IRepositoryValidator } from '../domain/repository-validator-interface';
 import { IFolderFinder } from '../domain/folder-repository-interface';
 import { IRepository } from '../domain/repository-interface';
+import { IInMemoryRepository } from '../domain/in-memory-repository-repository';
 
 class MockRepositoryValidator implements IRepositoryValidator {
   validate(repo: NewRepository) {
@@ -10,26 +11,37 @@ class MockRepositoryValidator implements IRepositoryValidator {
   }
 }
 
-const mockFolders = ['test1'];
 
 class MockFolderRepository implements IFolderFinder {
-  async getAllFolders(rootPath: string): Promise<string[]> {
-    return await Promise.resolve(mockFolders);
-  }
   remove(repoPath: string): boolean {
     return true;
   }
 }
 
-const MockRepo = { name: 'repo-1', lastUpdated: 'foo' };
+const MockRepo = {
+  name: 'repo-1',
+  lastUpdated: 123,
+  createdAt: 123,
+  uuid: '',
+  path: '',
+};
 
 const mockRepository: Repository[] = [MockRepo];
 
-class MockRepositoryRepository implements IRepository {
-  async getAllRepos(paths: string[]) {
+class MockGitRepository implements IRepository {
+  async createRepo(newRepo: NewRepository) {
+    return await Promise.resolve(MockRepo);
+  }
+}
+
+class MockInMemoryRepository implements IInMemoryRepository {
+  async list(): Promise<Repository[]> {
     return await Promise.resolve(mockRepository);
   }
-  async createRepo(newRepo: NewRepository) {
+  async createRepo(newRepo: NewRepository): Promise<Repository> {
+    return await Promise.resolve(MockRepo);
+  }
+  async deleteRepo(idRepo: string): Promise<Repository> {
     return await Promise.resolve(MockRepo);
   }
 }
@@ -40,24 +52,26 @@ describe('RespositoryService', () => {
   beforeEach(() => {
     const mockRepoValidator = new MockRepositoryValidator();
     const mockFolderFinder = new MockFolderRepository();
-    const mockRepoRepo = new MockRepositoryRepository();
+    const mockRepoRepo = new MockGitRepository();
+    const mockInMemoryREpo = new MockInMemoryRepository();
     repoService = new RepositoryService(
       mockRepoValidator,
       mockFolderFinder,
-      mockRepoRepo
+      mockRepoRepo,
+      mockInMemoryREpo
     );
   });
   it('should get all the repos', async () => {
-    expect(repoService.getRepos('test')).resolves.to.deep.equals(
-      mockRepository
-    );
+    expect(repoService.getRepos()).resolves.to.deep.equals(mockRepository);
   });
   it('should create and return a new repo', () => {
-    const { name } = MockRepo;
-    expect(repoService.createRepo({ name })).resolves.to.deep.equals(MockRepo);
+    const { name, path } = MockRepo;
+    expect(repoService.createRepo({ name, path })).resolves.to.deep.equals(
+      MockRepo
+    );
   });
 
   it('should delete a repo', () => {
-    expect(repoService.deleteRepo('test')).toBe(true);
+    expect(repoService.deleteRepo('test')).resolves.to.deep.equals(MockRepo);
   });
 });

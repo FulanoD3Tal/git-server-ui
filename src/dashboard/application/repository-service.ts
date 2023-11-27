@@ -1,4 +1,5 @@
 import { IFolderFinder } from '../domain/folder-repository-interface';
+import { IInMemoryRepository } from '../domain/in-memory-repository-repository';
 import { IRepository } from '../domain/repository-interface';
 import { IRepositoryValidator } from '../domain/repository-validator-interface';
 
@@ -6,18 +7,26 @@ export class RepositoryService {
   constructor(
     private readonly repoValidator: IRepositoryValidator,
     private readonly folderRepository: IFolderFinder,
-    private readonly repository: IRepository
+    private readonly gitRepository: IRepository,
+    private readonly inMemoryRepository: IInMemoryRepository
   ) {}
 
-  async getRepos(rootPath: string) {
-    const reposPaths = await this.folderRepository.getAllFolders(rootPath);
-    return await this.repository.getAllRepos(reposPaths);
+  async getRepos() {
+    return await this.inMemoryRepository.list();
   }
-  createRepo(newRepo: NewRepository) {
+  async createRepo(newRepo: NewRepository) {
     const parsedRepo = this.repoValidator.validate(newRepo);
-    return this.repository.createRepo(parsedRepo);
+    const createdRepo = await this.inMemoryRepository.createRepo(parsedRepo);
+    if (createdRepo) {
+      await this.gitRepository.createRepo(createdRepo);
+    }
+    return createdRepo;
   }
-  deleteRepo(repoPath: string) {
-    return this.folderRepository.remove(repoPath);
+  async deleteRepo(id: Repository['uuid']) {
+    const deleted = await this.inMemoryRepository.deleteRepo(id);
+    if (deleted) {
+      this.folderRepository.remove(deleted.path);
+    }
+    return deleted;
   }
 }

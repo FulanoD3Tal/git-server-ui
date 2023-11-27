@@ -1,6 +1,9 @@
 type Repository = {
+  uuid: string;
   name: string;
-  lastUpdated: string;
+  lastUpdated: number;
+  createdAt: number;
+  path: string;
 };
 
-type NewRepository = Omit<Repository, 'lastUpdated'>;
+type NewRepository = Pick<Repository, 'name' | 'path'>;
