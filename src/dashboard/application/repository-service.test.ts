@@ -11,7 +11,6 @@ class MockRepositoryValidator implements IRepositoryValidator {
   }
 }
 
-
 class MockFolderRepository implements IFolderFinder {
   remove(repoPath: string): boolean {
     return true;
@@ -20,8 +19,8 @@ class MockFolderRepository implements IFolderFinder {
 
 const MockRepo = {
   name: 'repo-1',
-  lastUpdated: "123",
-  createdAt: "123",
+  lastUpdated: new Date(),
+  createdAt: new Date(),
   uuid: '',
   path: '',
 };

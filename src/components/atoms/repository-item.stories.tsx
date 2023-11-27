@@ -22,7 +22,7 @@ type Story = StoryObj<CompType>;
 export const Primary: Story = {
   args: {
     name: 'my first repository',
-    lastUpdated: new Date('01/01/2023').toISOString(),
+    lastUpdated: new Date('01/01/2023'),
   },
 };
 export const Loading: Story = {

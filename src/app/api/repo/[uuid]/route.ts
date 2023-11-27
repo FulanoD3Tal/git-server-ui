@@ -1,4 +1,5 @@
 import { repositoryController } from '@/dashboard/infrastructure/repository-controller';
+import { Prisma } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
 export async function DELETE(
@@ -11,6 +12,16 @@ export async function DELETE(
       { message: 'This action is forbidden' },
       { status: 403 }
     );
-  const deleted = repositoryController.deleteRepo(uuid);
-  return NextResponse.json(deleted);
+  try {
+    const deleted = await repositoryController.deleteRepo(uuid);
+    return NextResponse.json(deleted);
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2025')
+        return NextResponse.json(
+          { message: "This repo doesn't exits" },
+          { status: 404 }
+        );
+    }
+  }
 }

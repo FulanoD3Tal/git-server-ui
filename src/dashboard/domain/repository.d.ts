@@ -1,8 +1,8 @@
 type Repository = {
   uuid: string;
   name: string;
-  lastUpdated: string;
-  createdAt: string;
+  lastUpdated: Date | null;
+  createdAt: Date | null;
   path: string;
 };
 

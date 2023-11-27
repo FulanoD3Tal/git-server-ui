@@ -8,6 +8,8 @@ describe('<RepositoryItem/>', () => {
     const RepoItemPrimary = composeStory(Primary, meta);
     render(<RepoItemPrimary />);
     screen.getByRole('listitem', { name: Primary?.args?.name });
-    screen.getByText(Primary.args?.lastUpdated as string, { exact: false });
+    screen.getByText(Primary.args?.lastUpdated?.toISOString() as string, {
+      exact: false,
+    });
   });
 });

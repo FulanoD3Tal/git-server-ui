@@ -10,7 +10,7 @@ describe('<RepositoryList/>', () => {
     render(<RepositoryListPrimary />);
     Primary?.args?.items?.forEach((item) => {
       screen.getByText(item.name);
-      screen.getByText(item.lastUpdated);
+      screen.getByText(item.lastUpdated?.toISOString() as string);
     });
   });
   it('should render empty message', () => {
