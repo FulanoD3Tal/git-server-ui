@@ -23,14 +23,14 @@ const items: Repository[] = [
   },
   {
     uuid: '',
-    name: 'First Repository',
+    name: 'Second Repository',
     path: '',
     lastUpdated: 'last day',
     createdAt: '',
   },
   {
     uuid: '',
-    name: 'First Repository',
+    name: 'Third Repository',
     path: '',
     lastUpdated: '27-11-202*',
     createdAt: '',

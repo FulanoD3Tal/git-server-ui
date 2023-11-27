@@ -10,7 +10,7 @@ export class RepositorySimpleGit implements IRepository {
     }
     try {
       await git.init([newRepo.name]);
-      return { ...newRepo, lastUpdated: Date.now() };
+      return { ...newRepo, lastUpdated: new Date().toISOString() };
     } catch (error) {
       throw new Error('There was and error creating the repo');
     }
