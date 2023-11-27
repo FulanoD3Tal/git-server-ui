@@ -5,8 +5,7 @@ import { ZodError } from 'zod';
 
 export async function GET() {
   try {
-    const { rootPath } = configurationController.getConfig();
-    const repos = await repositoryController.getRepos(rootPath!);
+    const repos = await repositoryController.getRepos();
     return NextResponse.json(repos);
   } catch (error) {
     return NextResponse.json(
@@ -21,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const { rootPath } = configurationController.getConfig();
-    const newRepo = { name: `${rootPath}/${json.name}` };
+    const newRepo = { ...json, path: `${rootPath}/${json.name}` };
     const created = await repositoryController.createRepo(newRepo);
     return NextResponse.json(created);
   } catch (error) {

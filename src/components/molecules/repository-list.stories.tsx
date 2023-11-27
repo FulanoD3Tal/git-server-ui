@@ -14,9 +14,27 @@ export default meta;
 type Story = StoryObj<CompType>;
 
 const items: Repository[] = [
-  { name: 'First Repository', lastUpdated: 'yesterday' },
-  { name: 'Second Repository', lastUpdated: 'last day' },
-  { name: 'Third Repository', lastUpdated: '27-11-202*' },
+  {
+    uuid: '',
+    name: 'First Repository',
+    path: '',
+    lastUpdated: 'yesterday',
+    createdAt: '',
+  },
+  {
+    uuid: '',
+    name: 'Second Repository',
+    path: '',
+    lastUpdated: 'last day',
+    createdAt: '',
+  },
+  {
+    uuid: '',
+    name: 'Third Repository',
+    path: '',
+    lastUpdated: '27-11-202*',
+    createdAt: '',
+  },
 ];
 
 export const Primary: Story = {
