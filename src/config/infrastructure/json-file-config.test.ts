@@ -21,7 +21,7 @@ describe('Config file', () => {
   it('should read the file config', () => {
     const configFileEmpty = {};
     const jsonFileConfig = new JsonFileConfig();
-    expect(jsonFileConfig.getConfigFile()).toEqual(configFileEmpty);
+    expect(jsonFileConfig.getConfigFile()).resolves.toEqual(configFileEmpty);
   });
 
   it('should write into the file config', () => {
@@ -29,6 +29,6 @@ describe('Config file', () => {
     const jsonFileConfig = new JsonFileConfig();
 
     jsonFileConfig.saveConfigFile(configFile);
-    expect(jsonFileConfig.getConfigFile()).toEqual(configFile);
+    expect(jsonFileConfig.getConfigFile()).resolves.toEqual(configFile);
   });
 });

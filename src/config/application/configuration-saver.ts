@@ -24,8 +24,8 @@ export class ConfigurationSaver {
    * @returns
    * @author [Ing. Roberto Alonso De la Garza Mendoza](https://github.com/FulanoD3Tal)
    */
-  setConfig(newConfig: PartialConfig) {
-    const prevConfig = this.getConfig();
+  async setConfig(newConfig: PartialConfig) {
+    const prevConfig = await this.getConfig();
     const actualConfig = { ...prevConfig, ...newConfig };
     const parsedConfig = this.configurationValidator.validate(actualConfig);
     const saved = this.configuration.saveConfigFile(parsedConfig);

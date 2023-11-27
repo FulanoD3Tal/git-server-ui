@@ -7,8 +7,8 @@ import { IConfigValidator } from '../domain/configuration-validator-interface';
 const testConfigFilePath = './config/config-test.json';
 
 class MockConfiguration implements IConfiguration {
-  getConfigFile(): Partial<Config> | null {
-    return DEFAULT_CONFIG;
+  async getConfigFile() {
+    return await Promise.resolve(DEFAULT_CONFIG);
   }
   saveConfigFile(config: Partial<Config>): boolean {
     return true;
@@ -30,11 +30,11 @@ describe('ConfigurationModule', () => {
     mockConfigValidator
   );
   it('should have a default configuration', () => {
-    expect(configurationSaver.getConfig()).toBe(DEFAULT_CONFIG);
+    expect(configurationSaver.getConfig()).resolves.toBe(DEFAULT_CONFIG);
   });
   it('should save a configuration field', () => {
     const newPath = 'test';
-    expect(configurationSaver.setConfig({ rootPath: newPath })).toMatchObject({
+    expect(configurationSaver.setConfig({ rootPath: newPath })).resolves.toMatchObject({
       ...DEFAULT_CONFIG,
       rootPath: newPath,
     });
