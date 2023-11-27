@@ -20,7 +20,8 @@ export const RepositoryItem: FC<RepositoryItemProps> = ({
       >
         {name}
       </h3>
-      <p className='text-sm opacity-60'>{lastUpdated}</p>
+      {/* TODO: add relative time */}
+      <p className='text-sm opacity-60'>{lastUpdated?.toISOString()}</p>
     </li>
   );
 };

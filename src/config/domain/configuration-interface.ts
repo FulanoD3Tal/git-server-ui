@@ -1,4 +1,4 @@
 export interface IConfiguration {
-  getConfigFile(): PartialConfig | null;
+  getConfigFile(): Promise<PartialConfig | null>;
   saveConfigFile(config: PartialConfig): boolean;
 }

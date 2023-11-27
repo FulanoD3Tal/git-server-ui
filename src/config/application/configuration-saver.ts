@@ -13,8 +13,8 @@ export class ConfigurationSaver {
    * @returns
    * @author [Ing. Roberto Alonso De la Garza Mendoza](https://github.com/FulanoD3Tal)
    */
-  getConfig() {
-    const config = this.configuration.getConfigFile();
+  async getConfig() {
+    const config = await this.configuration.getConfigFile();
     if (!config) return DEFAULT_CONFIG;
     return config;
   }

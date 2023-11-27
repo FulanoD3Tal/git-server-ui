@@ -1,13 +1,21 @@
+import { PrismaClient } from '@prisma/client';
 import { IInMemoryRepository } from '../domain/in-memory-repository-repository';
+import crypto from 'crypto';
 
 export class InMemoryRepositoryPrismaSQLite implements IInMemoryRepository {
-  list(): Promise<Repository[]> {
-    throw new Error('Method not implemented.');
+  private prisma = new PrismaClient();
+  async list(): Promise<Repository[]> {
+    return await this.prisma.repository.findMany();
   }
-  createRepo(newRepo: NewRepository): Promise<Repository> {
-    throw new Error('Method not implemented.');
+  async createRepo(newRepo: NewRepository): Promise<Repository> {
+    return await this.prisma.repository.create({
+      data: {
+        ...newRepo,
+        uuid: crypto.randomUUID(),
+      },
+    });
   }
-  deleteRepo(idRepo: string): Promise<Repository> {
-    throw new Error('Method not implemented.');
+  async deleteRepo(idRepo: string): Promise<Repository> {
+    return await this.prisma.repository.delete({ where: { uuid: idRepo } });
   }
 }

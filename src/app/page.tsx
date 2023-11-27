@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 export default async function Dashboard() {
-  const config = configurationController.getConfig();
+  const config = await configurationController.getConfig();
   if (!config.rootPath) redirect('/config');
   return (
     <main className='max-w-5xl mx-auto my-4'>

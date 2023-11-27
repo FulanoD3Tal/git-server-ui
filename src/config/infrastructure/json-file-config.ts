@@ -1,4 +1,5 @@
 import { writeFileSync, readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
 import { IConfiguration } from '../domain/configuration-interface';
 
 export class JsonFileConfig implements IConfiguration {
@@ -8,10 +9,10 @@ export class JsonFileConfig implements IConfiguration {
       throw new Error('CONFIG_FILE_PATH env variable is not available');
     return configFilePath;
   }
-  getConfigFile() {
+  async getConfigFile() {
     const configFilePath = this.loadFilePath();
     try {
-      const rawData = readFileSync(configFilePath);
+      const rawData = await readFile(configFilePath, { encoding: 'utf-8' });
       const config: PartialConfig = JSON.parse(rawData as unknown as string);
       return config;
     } catch (error) {

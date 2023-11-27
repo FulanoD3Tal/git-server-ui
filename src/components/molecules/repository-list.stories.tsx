@@ -18,22 +18,22 @@ const items: Repository[] = [
     uuid: '',
     name: 'First Repository',
     path: '',
-    lastUpdated: 'yesterday',
-    createdAt: '',
+    lastUpdated: new Date('01/01/2023'),
+    createdAt: new Date('01/01/2023'),
   },
   {
     uuid: '',
     name: 'Second Repository',
     path: '',
-    lastUpdated: 'last day',
-    createdAt: '',
+    lastUpdated: new Date('01/01/2023'),
+    createdAt: new Date('01/01/2023'),
   },
   {
     uuid: '',
     name: 'Third Repository',
     path: '',
-    lastUpdated: '27-11-202*',
-    createdAt: '',
+    lastUpdated: new Date('01/01/2023'),
+    createdAt: new Date('01/01/2023'),
   },
 ];
 
