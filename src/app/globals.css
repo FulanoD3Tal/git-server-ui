@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply dark:bg-gray-800 transition-colors;
+  @apply dark:bg-gray-800 transition-colors dark:text-white;
 }

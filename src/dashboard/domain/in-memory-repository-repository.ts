@@ -1,5 +1,5 @@
 export interface IInMemoryRepository {
-  list(): Promise<Repository[]>;
+  list(params:RepositoryQueryParams): Promise<Repository[]>;
   createRepo(newRepo: NewRepository): Promise<Repository>;
   deleteRepo(idRepo: Repository['uuid']): Promise<Repository>;
 }

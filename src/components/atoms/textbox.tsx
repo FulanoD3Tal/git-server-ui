@@ -10,7 +10,7 @@ export const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
       <input
         aria-label={label}
         placeholder={label}
-        className={`outline-none ${className}`}
+        className={`outline-none dark:bg-slate-500 ${className}`}
         {...props}
         ref={ref}
       />

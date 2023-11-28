@@ -11,8 +11,8 @@ export class RepositoryService {
     private readonly inMemoryRepository: IInMemoryRepository
   ) {}
 
-  async getRepos() {
-    return await this.inMemoryRepository.list();
+  async getRepos(params: RepositoryQueryParams) {
+    return await this.inMemoryRepository.list(params);
   }
   async createRepo(newRepo: NewRepository) {
     const parsedRepo = this.repoValidator.validate(newRepo);

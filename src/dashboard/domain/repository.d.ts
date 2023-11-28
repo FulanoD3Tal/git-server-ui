@@ -6,4 +6,8 @@ type Repository = {
   path: string;
 };
 
+type RepositoryQueryParams = {
+  query: string;
+};
+
 type NewRepository = Pick<Repository, 'name' | 'path'>;

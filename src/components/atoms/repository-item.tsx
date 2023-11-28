@@ -11,7 +11,11 @@ export const RepositoryItem: FC<RepositoryItemProps> = ({
   loading = false,
 }) => {
   return (
-    <li role='listitem' aria-label={name} className='list-none border-b py-1'>
+    <li
+      role='listitem'
+      aria-label={name}
+      className='list-none border-b dark:border-b-gray-600 py-1'
+    >
       <h3
         className={`${clsx(
           'text-xl font-semibold truncate mb-2 transition-opacity',
