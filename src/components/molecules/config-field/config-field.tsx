@@ -1,3 +1,4 @@
+'use client';
 import { TextBox, TextBoxProps } from '@/components/atoms/textbox';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC } from 'react';

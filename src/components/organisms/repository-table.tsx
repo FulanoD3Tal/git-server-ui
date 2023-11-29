@@ -1,6 +1,8 @@
 import { repositoryController } from '@/dashboard/infrastructure/repository-controller';
 import { RepositoryList } from '../molecules/repository-list';
 
+export const dynamic = 'force-dynamic';
+
 type RepositoryTableProps = {
   query: string;
 };
