@@ -16,10 +16,3 @@ export const Primary: Story = {
     textBoxProps: { label: 'Search...' },
   },
 };
-export const WithError: Story = {
-  args: {
-    ...Primary.args,
-    error: true,
-    hintText: 'this is a error',
-  },
-};

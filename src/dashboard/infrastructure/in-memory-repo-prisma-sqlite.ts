@@ -4,7 +4,15 @@ import crypto from 'crypto';
 
 export class InMemoryRepositoryPrismaSQLite implements IInMemoryRepository {
   private prisma = new PrismaClient();
-  async list(): Promise<Repository[]> {
+  async list(params: RepositoryQueryParams): Promise<Repository[]> {
+    const { query } = params;
+    if (query) {
+      return await this.prisma.repository.findMany({
+        where: {
+          name: { contains: query },
+        },
+      });
+    }
     return await this.prisma.repository.findMany();
   }
   async createRepo(newRepo: NewRepository): Promise<Repository> {

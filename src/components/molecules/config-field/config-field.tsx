@@ -27,7 +27,7 @@ export const ConfigField: FC<ConfigFieldProps> = ({
   disabled = false,
 }) => {
   return (
-    <motion.fieldset className='grid grid-cols-1 md:grid-cols-[250px_1fr]'>
+    <fieldset className='grid grid-cols-1 md:grid-cols-[250px_1fr]'>
       <label
         id={`label-${label}`}
         htmlFor={`field-${label}`}
@@ -42,17 +42,20 @@ export const ConfigField: FC<ConfigFieldProps> = ({
         disabled={disabled}
         {...(textBoxProps as TextBoxProps)}
       />
-      {error && (
-        <motion.span
-          className='text-red-500 dark:text-red-400 text-sm mt-1 md:col-start-2 md:row-start-2'
-          role='alert'
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 1 }}
-          exit={{ opacity: 0, y: -5 }}
-        >
-          {hitText}
-        </motion.span>
-      )}
-    </motion.fieldset>
+      <AnimatePresence>
+        {error && (
+          <motion.span
+            className='text-red-500 dark:text-red-400 text-sm mt-1 md:col-start-2 md:row-start-2'
+            role='alert'
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 1 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ type: 'spring', duration: 0.2 }}
+          >
+            {hitText}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </fieldset>
   );
 };
