@@ -32,12 +32,13 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       CONFIG_FILE_PATH: './config/config-test.json'
+      DATABASE_URL: 'file:../config/db_prod.db'
     steps:
       - uses: actions/checkout@v4
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
+          build: npm run cypress:build-and-db
           start: npm start
           wait-on: 'http://localhost:3000'
       - uses: actions/upload-artifact@v3

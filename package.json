@@ -10,6 +10,7 @@
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "cypress:build-and-db":"npm run build && npx prisma migrate deploy",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
