@@ -1,5 +1,6 @@
 import { configurationController } from '@/config/infrastructure/configuration-controller';
 import { repositoryController } from '@/dashboard/infrastructure/repository-controller';
+import { Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 
@@ -30,6 +31,14 @@ export async function POST(req: NextRequest) {
         error: er.message,
       }));
       return NextResponse.json(errors, { status: 403 });
+    }
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002')
+        return NextResponse.json(
+          { message: 'This repo already exits' },
+          { status: 409 }
+        );
     }
 
     return NextResponse.json(
