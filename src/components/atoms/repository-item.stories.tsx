@@ -1,17 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { RepositoryItem } from './repository-item';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 type CompType = typeof RepositoryItem;
+
+const queryClient = new QueryClient();
 
 const meta: Meta<CompType> = {
   title: '01-atoms/common/repository-item',
   component: RepositoryItem,
   decorators: [
     (Story) => (
-      <div role='list'>
-        <Story />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div role='list'>
+          <Story />
+        </div>
+      </QueryClientProvider>
     ),
   ],
 };

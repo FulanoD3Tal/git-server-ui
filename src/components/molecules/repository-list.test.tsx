@@ -1,10 +1,24 @@
-import { describe, it, afterEach } from 'vitest';
+import { describe, it, afterEach, vi, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import { composeStory } from '@storybook/react';
 import meta, { Primary, Empty } from './repository-list.stories';
+import { useRepo } from '@/dashboard/infrastructure/hooks/useRepo';
+
+vi.mock('@/dashboard/infrastructure/hooks/useRepo');
 
 describe('<RepositoryList/>', () => {
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+  });
+  beforeEach(()=>{
+    vi.mocked(useRepo).mockReturnValue({
+      delRepo: vi.fn(),
+      createRepo: vi.fn(),
+      isDeleting: false,
+      isPending: false,
+    });
+  });
   it('should render all items', () => {
     const RepositoryListPrimary = composeStory(Primary, meta);
     render(<RepositoryListPrimary />);

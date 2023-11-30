@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { postRepo } from '../http/repo-rest-repository';
+import { deleteRepo, postRepo } from '../http/repo-rest-repository';
 import { AxiosError } from 'axios';
 
 export const useRepo = () => {
@@ -10,8 +10,15 @@ export const useRepo = () => {
   >({
     mutationFn: postRepo,
   });
+
+  const { mutate: delRepo, isPending: isDeleting } = useMutation({
+    mutationFn: deleteRepo,
+  });
+
   return {
     createRepo: mutate,
     isPending,
+    delRepo,
+    isDeleting,
   };
 };

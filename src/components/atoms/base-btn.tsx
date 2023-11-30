@@ -7,7 +7,8 @@ type ButtonType = 'primary' | 'secondary';
 
 type BaseButtonProps = {
   btnType?: ButtonType;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & ButtonHTMLAttributes<HTMLButtonElement> &
+  MotionProps;
 
 export const BaseButton: FC<BaseButtonProps> = ({
   btnType = 'primary',
