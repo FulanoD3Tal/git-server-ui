@@ -1,12 +1,23 @@
-import { repositoryController } from '@/dashboard/infrastructure/repository-controller';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 import { RepositoryList } from '../molecules/repository-list';
-
-export const dynamic = 'force-dynamic';
+import { repositoryController } from '@/dashboard/infrastructure/repository-controller';
 
 type RepositoryTableProps = {
-  query: string;
+  query: RepositoryQueryParams;
 };
 export default async function RepositoryTable({ query }: RepositoryTableProps) {
-  const repos = await repositoryController.getRepos({ query });
-  return <RepositoryList items={repos} emptyMessage='No repos founds' />;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', query],
+    queryFn: async () => await repositoryController.getRepos({}),
+  });
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <RepositoryList query={query} emptyMessage='No repos founds' />
+    </HydrationBoundary>
+  );
 }

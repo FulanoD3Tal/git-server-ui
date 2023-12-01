@@ -33,6 +33,5 @@ export const Primary: Story = {
 export const Loading: Story = {
   args: {
     ...Primary.args,
-    loading: true,
   },
 };

@@ -9,3 +9,8 @@ export async function deleteRepo(uuid: Repository['uuid']) {
   const response = await api.delete(`/repo/${uuid}`);
   return response.data;
 }
+
+export async function getRepos(query: RepositoryQueryParams) {
+  const response = await api.get<Repository[]>('/repo', { params: query });
+  return response.data;
+}

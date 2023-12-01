@@ -7,14 +7,21 @@ describe('Dashboard', () => {
     cy.findByRole('link', { name: /dashboard/i }).click();
     cy.findByText('My Git Server');
   });
-  // it.only('create a new repo', () => {
-  //   const repo = 'Testing repo';
-  //   cy.visit('/');
-  //   cy.findByText(/new repo/i).click();
-  //   cy.findByText(/Create a new repo/i);
+  it('create a new repo', () => {
+    const repo = 'Testing repo';
+    const repoAfterName = repo.toLowerCase().replaceAll(' ', '-');
+    cy.visit('/');
+    cy.findByText(/new repo/i).click();
+    cy.findByText(/Create a new repo/i);
 
-  //   cy.findByLabelText(/repo name/i).type(repo);
-  //   cy.findByRole('button', { name: /create repo/i }).click();
-  //   cy.findByText(repo);
-  // });
+    cy.findByLabelText(/repo name/i).type(repo);
+    cy.findByRole('button', { name: /create repo/i }).click();
+    cy.findByText(repoAfterName);
+
+    cy.findByRole('button', { name: `delete repo ${repoAfterName}` }).click();
+    cy.findByRole('button', {
+      name: `confirm delete repo ${repoAfterName}`,
+    }).click();
+    cy.findByText('No repos founds');
+  });
 });
