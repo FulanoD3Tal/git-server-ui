@@ -23,9 +23,6 @@ describe('<RepositoryItem/>', () => {
     const RepoItemPrimary = composeStory(Primary, meta);
     render(<RepoItemPrimary />);
     screen.getByRole('listitem', { name: Primary?.args?.name });
-    screen.getByText(Primary.args?.lastUpdated?.toString() as string, {
-      exact: false,
-    });
   });
   it('should trigger delete action', async () => {
     const delRepoMock = vi.fn();

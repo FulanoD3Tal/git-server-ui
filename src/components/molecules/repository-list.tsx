@@ -24,7 +24,7 @@ export const RepositoryList: FC<RepositoryList> = ({ query, emptyMessage }) => {
           <span role='alert'>{emptyMessage}</span>
         </li>
       )}
-      <AnimatePresence mode='popLayout'>
+      <AnimatePresence>
         {repos?.map((item) => (
           <RepositoryItem key={item.uuid} {...item} />
         ))}

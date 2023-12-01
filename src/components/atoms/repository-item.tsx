@@ -4,6 +4,7 @@ import { clsx } from 'clsx';
 import { BaseButton } from './base-btn';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRepoMutation } from '@/dashboard/infrastructure/hooks/use-repo';
+import { relativeDate } from '@/shared/infrastructure/utils/date-utils';
 
 type RepositoryItemProps = Repository;
 
@@ -38,15 +39,16 @@ export const RepositoryItem = forwardRef<HTMLLIElement, RepositoryItemProps>(
         >
           {name}
         </h3>
-        {/* TODO: add relative time */}
-        <p className='text-sm opacity-60 mb-4'>{lastUpdated?.toString()}</p>
+        <p className='text-sm opacity-60 mb-4'>
+          Updated {relativeDate(lastUpdated)}
+        </p>
         <div className='flex flex-row gap-2'>
           <BaseButton
             btnType='primary'
             onClick={handleConfirmBtn}
             disabled={confirm}
             className='z-30 !p-2'
-            aria-label='delete'
+            aria-label={`delete repo ${name}`}
           >
             <svg
               height='24'
@@ -67,7 +69,7 @@ export const RepositoryItem = forwardRef<HTMLLIElement, RepositoryItemProps>(
                 animate={{ x: 0, opacity: 1, zIndex: 20 }}
                 exit={{ x: '-100%', opacity: 1, zIndex: 20 }}
                 btnType='primary'
-                aria-label='yes'
+                aria-label={`confirm delete repo ${name}`}
                 transition={{
                   type: 'spring',
                   duration: 0.2,
@@ -108,7 +110,7 @@ export const RepositoryItem = forwardRef<HTMLLIElement, RepositoryItemProps>(
                 initial={{ x: '-200%', opacity: 0, zIndex: 10 }}
                 animate={{ x: 0, opacity: 1, zIndex: 10 }}
                 exit={{ x: '-200%', opacity: 1, zIndex: 10 }}
-                aria-label='no'
+                aria-label={`cancel delete repo ${name}`}
                 transition={{
                   type: 'spring',
                   duration: 0.4,

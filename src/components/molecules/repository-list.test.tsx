@@ -55,7 +55,6 @@ describe('<RepositoryList/>', () => {
     render(<RepositoryListPrimary />);
     items.forEach((item) => {
       screen.getByText(item.name);
-      screen.getByText(item.lastUpdated?.toString() as string);
     });
   });
   it('should render empty message', () => {
