@@ -1,8 +1,14 @@
 import { ConfigPage } from '@/components/pages/config-page/config-page';
 import { configurationController } from '@/config/infrastructure/configuration-controller';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Git Server Settings',
+  description: 'Modify the settings and configurations of the server',
+};
 
 export default async function ConfigSettingsPage() {
   const config = await configurationController.getConfig();
