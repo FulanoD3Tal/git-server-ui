@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
 import { RepositoryItem } from '../atoms/repository-item';
-import { useRepo } from '@/dashboard/infrastructure/hooks/useRepo';
+import { useRepoQuery } from '@/dashboard/infrastructure/hooks/use-repo';
 import { AnimatePresence } from 'framer-motion';
 
 type RepositoryList = {
@@ -16,7 +16,7 @@ type RepositoryList = {
  * @author [Ing. Roberto Alonso De la Garza Mendoza](https://github.com/FulanoD3Tal)
  */
 export const RepositoryList: FC<RepositoryList> = ({ query, emptyMessage }) => {
-  const { repos } = useRepo({ query });
+  const { repos } = useRepoQuery({ query });
   return (
     <ul role='list' className='flex flex-col gap-3'>
       {repos?.length === 0 && (
@@ -26,7 +26,7 @@ export const RepositoryList: FC<RepositoryList> = ({ query, emptyMessage }) => {
       )}
       <AnimatePresence mode='popLayout'>
         {repos?.map((item) => (
-          <RepositoryItem key={item.name} {...item} />
+          <RepositoryItem key={item.uuid} {...item} />
         ))}
       </AnimatePresence>
     </ul>

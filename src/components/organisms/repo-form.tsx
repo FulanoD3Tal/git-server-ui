@@ -3,7 +3,7 @@
 import { useRepoForm } from '@/dashboard/infrastructure/hooks/use-repo-form';
 import { BaseButton } from '../atoms/base-btn';
 import { ConfigField } from '../molecules/config-field/config-field';
-import { useRepo } from '@/dashboard/infrastructure/hooks/useRepo';
+import { useRepoMutation } from '@/dashboard/infrastructure/hooks/use-repo';
 import { useRouter } from 'next/navigation';
 
 export const RepoForm = () => {
@@ -16,7 +16,7 @@ export const RepoForm = () => {
 
   const { push } = useRouter();
 
-  const { createRepo, isPending } = useRepo({});
+  const { createRepo, isPending } = useRepoMutation();
 
   const onSubmit = (data: NewRepository) => {
     createRepo(data, {

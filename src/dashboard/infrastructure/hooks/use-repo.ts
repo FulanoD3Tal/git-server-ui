@@ -6,7 +6,7 @@ type UseRepoProps = {
   query?: RepositoryQueryParams;
 };
 
-export const useRepo = ({ query = { query: '' } }: UseRepoProps) => {
+export const useRepoMutation = () => {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation<
     Repository,
@@ -26,16 +26,20 @@ export const useRepo = ({ query = { query: '' } }: UseRepoProps) => {
     },
   });
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['repos', query],
-    queryFn: () => getRepos(query),
-  });
-
   return {
     createRepo: mutate,
     isPending,
     delRepo,
     isDeleting,
+  };
+};
+
+export const useRepoQuery = ({ query = { query: '' } }: UseRepoProps) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['repos', query],
+    queryFn: () => getRepos(query),
+  });
+  return {
     repos: data,
     isLoading,
   };

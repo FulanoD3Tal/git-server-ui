@@ -7,7 +7,6 @@ type CompType = typeof RepositoryList;
 
 const queryClient = new QueryClient();
 
-
 const meta: Meta<CompType> = {
   title: '02-molecules/common/repository-list',
   component: RepositoryList,
@@ -15,7 +14,7 @@ const meta: Meta<CompType> = {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
-          <Story />
+        <Story />
       </QueryClientProvider>
     ),
   ],
@@ -24,39 +23,10 @@ const meta: Meta<CompType> = {
 export default meta;
 type Story = StoryObj<CompType>;
 
-const items: Repository[] = [
-  {
-    uuid: '',
-    name: 'First Repository',
-    path: '',
-    lastUpdated: new Date('01/01/2023'),
-    createdAt: new Date('01/01/2023'),
-  },
-  {
-    uuid: '',
-    name: 'Second Repository',
-    path: '',
-    lastUpdated: new Date('02/01/2023'),
-    createdAt: new Date('01/01/2023'),
-  },
-  {
-    uuid: '',
-    name: 'Third Repository',
-    path: '',
-    lastUpdated: new Date('03/01/2023'),
-    createdAt: new Date('01/01/2023'),
-  },
-];
-
-export const Primary: Story = {
-  args: {
-    items,
-  },
-};
+export const Primary: Story = {};
 
 export const Empty: Story = {
   args: {
-    items: [],
     emptyMessage: 'No repositories',
   },
 };
