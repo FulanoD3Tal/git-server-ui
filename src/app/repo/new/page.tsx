@@ -1,5 +1,11 @@
-import { RepoForm } from "@/components/organisms/repo-form";
-import Link from "next/link";
+import { RepoForm } from '@/components/organisms/repo-form';
+import { type Metadata } from 'next';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'New repo',
+  description: 'create your new repository',
+};
 
 export default function NewRepoPage() {
   return (
