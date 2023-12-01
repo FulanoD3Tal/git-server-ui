@@ -10,4 +10,5 @@ export class ConfigurationValidator implements IConfigValidator {
 export const configSchema = z.object({
   defaultBranch: z.string().min(3).trim(),
   rootPath: z.string().min(1).trim(),
+  serverUrl: z.string().optional(),
 });
