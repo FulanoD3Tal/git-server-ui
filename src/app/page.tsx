@@ -22,7 +22,7 @@ export default async function Dashboard({
       <section className='flex flex-col gap-4'>
         <SearchBar textBoxProps={{ label: 'Search', spellCheck: false }} />
         <Suspense key={query} fallback={<RepositoryListSkeleton />}>
-          <RepositoryTable query={query} />
+          <RepositoryTable query={{ query }} />
         </Suspense>
       </section>
     </main>

@@ -4,9 +4,11 @@ import { Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const query = searchParams.get('query') || '';
   try {
-    const repos = await repositoryController.getRepos({ query: '' });
+    const repos = await repositoryController.getRepos({ query });
     return NextResponse.json(repos);
   } catch (error) {
     return NextResponse.json(

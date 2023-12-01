@@ -1,18 +1,34 @@
-import { useMutation } from '@tanstack/react-query';
-import { deleteRepo, postRepo } from '../http/repo-rest-repository';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getRepos, postRepo, deleteRepo } from '../http/repo-rest-repository';
 import { AxiosError } from 'axios';
 
-export const useRepo = () => {
+type UseRepoProps = {
+  query?: RepositoryQueryParams;
+};
+
+export const useRepo = ({ query = { query: '' } }: UseRepoProps) => {
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation<
     Repository,
     AxiosError<{ message: string }>,
     NewRepository
   >({
     mutationFn: postRepo,
+    onSettled() {
+      queryClient.invalidateQueries({ queryKey: ['repos'] });
+    },
   });
 
   const { mutate: delRepo, isPending: isDeleting } = useMutation({
     mutationFn: deleteRepo,
+    onSettled() {
+      queryClient.invalidateQueries({ queryKey: ['repos'] });
+    },
+  });
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['repos', query],
+    queryFn: () => getRepos(query),
   });
 
   return {
@@ -20,5 +36,7 @@ export const useRepo = () => {
     isPending,
     delRepo,
     isDeleting,
+    repos: data,
+    isLoading,
   };
 };

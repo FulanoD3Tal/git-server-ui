@@ -16,7 +16,7 @@ export const RepoForm = () => {
 
   const { push } = useRouter();
 
-  const { createRepo, isPending } = useRepo();
+  const { createRepo, isPending } = useRepo({});
 
   const onSubmit = (data: NewRepository) => {
     createRepo(data, {
