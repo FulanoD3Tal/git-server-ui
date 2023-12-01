@@ -38,8 +38,8 @@ describe('<RepositoryItem/>', () => {
     screen.getByRole('listitem', { name: Primary?.args?.name });
     const btn = screen.getByRole('button', { name: /delete/i });
     user.click(btn);
-    const yesBtn = await screen.findByRole('button', { name: /yes/i });
-    await screen.findByRole('button', { name: /no/i });
+    const yesBtn = await screen.findByRole('button', { name: /confirm/i });
+    await screen.findByRole('button', { name: /cancel/i });
     await user.click(yesBtn);
     expect(delRepoMock).toHaveBeenCalledWith(Primary.args?.uuid);
   });
