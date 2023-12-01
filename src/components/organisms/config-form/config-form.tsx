@@ -65,6 +65,17 @@ export const ConfigForm: FC<ConfigFormProps> = ({
           error={Boolean(errors.defaultBranch)}
           hitText={errors.defaultBranch?.message}
         />
+        <ConfigField
+          label='Server url'
+          textBoxProps={{
+            ...register('serverUrl'),
+            label: 'Server url (myserver.com,git@192,etc)',
+            'aria-label': 'Server url',
+            disabled: loading,
+          }}
+          error={Boolean(errors.serverUrl)}
+          hitText={errors.serverUrl?.message}
+        />
         <BaseButton disabled={loading} type='submit' className='mt-5'>
           {loading ? 'Saving...' : 'Save'}
         </BaseButton>

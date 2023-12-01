@@ -25,7 +25,11 @@ describe('<ConfigForm/>', () => {
     const field2 = await screen.findByRole('textbox', { name: fields[1] });
     const button = await screen.getByRole('button');
 
-    const data: Config = { rootPath: 'field1', defaultBranch: 'field2' };
+    const data: Config = {
+      rootPath: 'field1',
+      defaultBranch: 'field2',
+      serverUrl: '',
+    };
 
     await user.type(field1, data.rootPath);
     await user.type(field2, data.defaultBranch);
@@ -35,7 +39,11 @@ describe('<ConfigForm/>', () => {
   });
 
   it('should reload default inputs values', async () => {
-    const previousConfig: Config = { defaultBranch: 'foo', rootPath: 'bar' };
+    const previousConfig: Config = {
+      defaultBranch: 'foo',
+      rootPath: 'bar',
+      serverUrl: '',
+    };
     const ConfigFormPrimary = composeStory(Primary, meta);
     render(<ConfigFormPrimary previousData={previousConfig} />);
 
