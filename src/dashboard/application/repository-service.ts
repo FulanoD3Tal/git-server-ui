@@ -12,13 +12,19 @@ export class RepositoryService {
   ) {}
 
   async getRepos(params: RepositoryQueryParams) {
-    return await this.inMemoryRepository.list(params);
+    const dbRepos = await this.inMemoryRepository.list(params);
+    const reposWithLastUpdated = dbRepos.map(async (repo) => {
+      const lastUpdated = await this.gitRepository.getLastUpdated(repo.path);
+      return { ...repo, lastUpdated };
+    });
+    const finalRepos = await Promise.all(reposWithLastUpdated);
+    return finalRepos;
   }
   async createRepo(newRepo: NewRepository, defaultBranch: string) {
     const parsedRepo = this.repoValidator.validate(newRepo);
     const createdRepo = await this.inMemoryRepository.createRepo(parsedRepo);
     if (createdRepo) {
-      await this.gitRepository.createRepo(createdRepo,defaultBranch);
+      await this.gitRepository.createRepo(createdRepo, defaultBranch);
     }
     return createdRepo;
   }
