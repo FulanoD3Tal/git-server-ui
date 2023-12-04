@@ -1,3 +1,3 @@
 export interface IRepository {
-  createRepo(newRepo: Repository): Promise<Repository>;
+  createRepo(newRepo: Repository,defaultBranch:string): Promise<Repository>;
 }

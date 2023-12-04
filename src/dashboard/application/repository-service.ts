@@ -14,11 +14,11 @@ export class RepositoryService {
   async getRepos(params: RepositoryQueryParams) {
     return await this.inMemoryRepository.list(params);
   }
-  async createRepo(newRepo: NewRepository) {
+  async createRepo(newRepo: NewRepository, defaultBranch: string) {
     const parsedRepo = this.repoValidator.validate(newRepo);
     const createdRepo = await this.inMemoryRepository.createRepo(parsedRepo);
     if (createdRepo) {
-      await this.gitRepository.createRepo(createdRepo);
+      await this.gitRepository.createRepo(createdRepo,defaultBranch);
     }
     return createdRepo;
   }

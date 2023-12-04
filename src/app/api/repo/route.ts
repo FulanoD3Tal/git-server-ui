@@ -22,9 +22,13 @@ export async function POST(req: NextRequest) {
   const json: NewRepository = await req.json();
 
   try {
-    const { rootPath } = await configurationController.getConfig();
+    const { rootPath, defaultBranch } =
+      await configurationController.getConfig();
     const newRepo = { ...json, path: `${rootPath}/${json.name}` };
-    const created = await repositoryController.createRepo(newRepo);
+    const created = await repositoryController.createRepo(
+      newRepo,
+      defaultBranch || ''
+    );
     return NextResponse.json(created);
   } catch (error) {
     if (error instanceof ZodError) {

@@ -61,11 +61,11 @@ describe('RespositoryService', () => {
     );
   });
   it('should get all the repos', async () => {
-    expect(repoService.getRepos()).resolves.to.deep.equals(mockRepository);
+    expect(repoService.getRepos({})).resolves.to.deep.equals(mockRepository);
   });
   it('should create and return a new repo', () => {
     const { name, path } = MockRepo;
-    expect(repoService.createRepo({ name, path })).resolves.to.deep.equals(
+    expect(repoService.createRepo({ name, path }, '')).resolves.to.deep.equals(
       MockRepo
     );
   });
