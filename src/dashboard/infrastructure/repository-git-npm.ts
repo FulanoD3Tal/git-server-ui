@@ -3,6 +3,7 @@ import { IRepository } from '../domain/repository-interface';
 import fs from 'fs';
 
 export class RepositorySimpleGit implements IRepository {
+  // TODO: check if return a Date of only string value
   async getLastUpdated(gitPath: string): Promise<string> {
     const git = simpleGit({ baseDir: gitPath });
     let lastUpdated = '';

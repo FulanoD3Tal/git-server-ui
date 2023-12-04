@@ -28,6 +28,9 @@ const MockRepo = {
 const mockRepository: Repository[] = [MockRepo];
 
 class MockGitRepository implements IRepository {
+  async getLastUpdated(gitPath: string): Promise<string> {
+    return await Promise.resolve(MockRepo.lastUpdated);
+  }
   async createRepo(newRepo: NewRepository) {
     return await Promise.resolve(MockRepo);
   }
