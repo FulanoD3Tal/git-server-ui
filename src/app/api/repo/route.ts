@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
     const repos = await repositoryController.getRepos({ query });
     return NextResponse.json(repos);
   } catch (error) {
+    console.log("🚀 ~ file: route.ts:14 ~ GET ~ error:", error)
     return NextResponse.json(
       { message: 'There was and error getting the repos' },
       { status: 500 }
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
     );
     return NextResponse.json(created);
   } catch (error) {
+    console.log("🚀 ~ file: route.ts:34 ~ POST ~ error:", error)
     if (error instanceof ZodError) {
       const errors = error.issues.map((er) => ({
         field: er.path.join(','),
@@ -45,6 +47,10 @@ export async function POST(req: NextRequest) {
           { message: 'This repo already exits' },
           { status: 409 }
         );
+      return NextResponse.json(
+        { message: 'There was and error with the server, try later' },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(

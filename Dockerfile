@@ -16,7 +16,7 @@ COPY . .
 
 # Disable telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
-
+RUN npx prisma generate
 RUN npm run build
 
 
@@ -29,6 +29,8 @@ ENV NODE_ENV=production
 # Disable telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN apk add git
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -40,6 +42,9 @@ RUN chown nextjs:nodejs .next
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --chown=nextjs:nodejs prisma ./prisma/
+COPY --chown=nextjs:nodejs config ./config/
+COPY --chown=nextjs:nodejs repos ./repos/
 
 USER nextjs
 
@@ -49,4 +54,4 @@ ENV PORT=3000
 
 ENV HOSTNAME="0.0.0.0"
 
-CMD [ "node","server.js" ]
+CMD [ "npm","run","start:prod" ]

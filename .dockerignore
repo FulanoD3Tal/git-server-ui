@@ -1,0 +1,5 @@
+./config/**
+./repos/**
+
+.env
+.env.*

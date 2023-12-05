@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "cypress:build-and-db": "npm run build && npx prisma migrate deploy",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "start:prod":"npx prisma migrate deploy && node server.js"
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.2",
