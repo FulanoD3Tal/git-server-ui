@@ -16,6 +16,7 @@ export async function DELETE(
     const deleted = await repositoryController.deleteRepo(uuid);
     return NextResponse.json(deleted);
   } catch (error) {
+    console.log("🚀 ~ file: route.ts:19 ~ error:", error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025')
         return NextResponse.json(
