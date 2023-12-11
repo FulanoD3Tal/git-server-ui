@@ -1,4 +1,4 @@
-FROM node:21-alpine AS base
+FROM node:18-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -31,17 +31,25 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add git
 
+ENV GUI=1001
+ENV UID=1001
+
+RUN addgroup --system --gid ${UID} nodejs
+RUN adduser --system --uid ${GUI} nextjs
+
 COPY --from=builder /app/public ./public
 
 # Set the correct permision for prerender cache
 RUN mkdir .next
+RUN chown nextjs:nodejs .next
 
-COPY --from=builder  /app/.next/standalone ./
-COPY --from=builder  /app/.next/static ./.next/static
-COPY  prisma ./prisma/
-COPY  config ./config/
-COPY  repos ./repos/
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --chown=nextjs:nodejs prisma ./prisma/
+COPY --chown=nextjs:nodejs config ./config/
+COPY --chown=nextjs:nodejs repos ./repos/
 
+USER nextjs
 
 EXPOSE 3000
 
