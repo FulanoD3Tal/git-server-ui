@@ -31,9 +31,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add git
 
-ENV GUI=1001
-ENV UID=1001
-
 RUN addgroup --system --gid ${UID} nodejs
 RUN adduser --system --uid ${GUI} nextjs
 
